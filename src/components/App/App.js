@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { getUrls } from '../../apiCalls';
+import { getUrls, postNewUrl } from '../../apiCalls';
 import UrlContainer from '../UrlContainer/UrlContainer';
 import UrlForm from '../UrlForm/UrlForm';
 
@@ -13,11 +13,20 @@ export class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3001/api/v1/urls')
-    .then(response => response.json())
+    getUrls()
     .then(data => this.setState({ urls: data.urls }))
-    .then(() => console.log('URLS set in state >>>>', this.state.urls))
     .catch(error => console.log(error))
+  }
+
+ shortenNewUrl = (newUrl) => {
+    postNewUrl(newUrl)
+      .then(response => {
+        if (response.ok) {
+          console.log('POST RESPONSE >>>', response.json)
+          return response.json();
+        }
+      })
+      .then(() => this.setState({ urls: [...this.state.urls, newUrl] }));
   }
 
   render() {
