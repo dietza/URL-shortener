@@ -52,7 +52,7 @@ describe('URL Shortener', () => {
       .find('.submit-btn').should('contain', 'Shorten Please')
   });
 
-  it.skip ('Should update with the info a user enters into the fields', () => {
+  it ('Should update with the info a user enters into the fields', () => {
     cy
       .get('form .title-input[type=text]').type('Title of New URL to add')
       .get('.urlToShorten-input[type=text]').type('https://http.cat/301')
