@@ -8,7 +8,6 @@ describe('URL Shortener', () => {
     .then((mockUrlsData) => {
       cy.intercept('GET', 'http://localhost:3001/api/v1/urls', {
         statusCode: 200,
-        delay: 100,
         body: mockUrlsData
       })
     })
@@ -34,7 +33,12 @@ describe('URL Shortener', () => {
 
   it ('Should display the form inputs for a user to submit a new URL', () => {
     cy
-      .get('form .title[type=text]')
+      .get('form')
+      .find('.title-input[type=text]').should('contain', '')
+      .get('form')
+      .find('.urlToShorten-input[type=text]').should('contain', '')
+      .get('form')
+      .find('.submit-btn').should('contain', 'Shorten Please')
   });
 
 })
