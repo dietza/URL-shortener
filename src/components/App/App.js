@@ -13,6 +13,10 @@ export class App extends Component {
   }
 
   componentDidMount() {
+    this.fetchAllUrls()
+  }
+
+  fetchAllUrls = () => {
     getUrls()
     .then(data => this.setState({ urls: data.urls }))
     .catch(error => console.log(error))
@@ -25,7 +29,7 @@ export class App extends Component {
           return response.json();
         }
       })
-      .then(() => this.setState({ urls: [...this.state.urls, newUrl] }));
+      .then(() => this.fetchAllUrls());
   }
 
   render() {
