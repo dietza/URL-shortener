@@ -26,13 +26,9 @@ class UrlForm extends Component {
 
     this.checkInputs();
     if (this.state.error === '') {
-
-      console.log('error check >>>', this.state.error)
-
       this.props.shortenNewUrl(newUrl);
       this.clearInputs();
-      }
-
+    }
   }
 
   checkInputs = () => {
