@@ -28,8 +28,13 @@ describe('URL Shortener', () => {
 
   it ('Should display the URLs currently stored on the server', () => {
     cy
-    .get('section')
-    .find('.url').should('have.length', 4)
+      .get('section')
+      .find('.url').should('have.length', 4)
+  });
+
+  it ('Should display the form inputs for a user to submit a new URL', () => {
+    cy
+      .get('form .title[type=text]')
   });
 
 })
