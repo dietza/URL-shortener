@@ -21,4 +21,15 @@ describe('URL Shortener', () => {
       .url().should('eq', `${baseUrl}/`)
   });
 
+  it ('Should show the site header when the home page is loaded', () => {
+    cy
+      .get('header h1').should('contain', 'URL Shortener')
+  });
+
+  it ('Should display the URLs currently stored on the server', () => {
+    cy
+    .get('section')
+    .find('.url').should('have.length', 4)
+  });
+
 })
