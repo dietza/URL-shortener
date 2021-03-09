@@ -6,7 +6,8 @@ class UrlForm extends Component {
     this.props = props;
     this.state = {
       title: '',
-      urlToShorten: ''
+      urlToShorten: '',
+      error: ''
     };
   }
 
@@ -15,8 +16,6 @@ class UrlForm extends Component {
   }
 
   handleSubmit = e => {
-
-    console.log('e in SUBMIT >>>', e)
     e.preventDefault();
 
     const newUrl = {
@@ -25,8 +24,23 @@ class UrlForm extends Component {
       title: this.state.title
     }
 
-    this.props.shortenNewUrl(newUrl)
-    this.clearInputs();
+    this.checkInputs();
+    if (this.state.error === '') {
+
+      console.log('error check >>>', this.state.error)
+
+      this.props.shortenNewUrl(newUrl);
+      this.clearInputs();
+      }
+
+  }
+
+  checkInputs = () => {
+    if ((this.state.title === '') && (this.state.urlToShorten)) {
+      this.setState({error: 'Please fill in a title!'})
+    } else if ((this.state.title) && (this.state.urlToShorten === '')) {
+      this.setState({error: 'Please fill in a URL for us to shorten!'})
+    }
   }
 
   clearInputs = () => {
@@ -55,6 +69,10 @@ class UrlForm extends Component {
         <button onClick={e => this.handleSubmit(e)}>
           Shorten Please!
         </button>
+
+        {this.state.error &&
+        <h3 className="error-message">{this.state.error}</h3>}
+
       </form>
     )
   }
