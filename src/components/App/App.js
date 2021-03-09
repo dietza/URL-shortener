@@ -22,7 +22,6 @@ export class App extends Component {
     postNewUrl(newUrl)
       .then(response => {
         if (response.ok) {
-          console.log('POST RESPONSE >>>', response.json)
           return response.json();
         }
       })
